@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "imagePath": "burger.jpeg",
+    "weight": 232,
+    "title": "Title",
+    "description": "description",
+    "price": 1
+  },
+  {
+    "id": 2,
+    "imagePath": "burger.jpeg",
+    "weight": 232,
+    "title": "Title",
+    "description": "description",
+    "price": 2
+  },
+  {
+    "id": 3,
+    "imagePath": "burger.jpeg",
+    "weight": 232,
+    "title": "Title",
+    "description": "description",
+    "price": 3
+  },
+  {
+    "id": 4,
+    "imagePath": "burger.jpeg",
+    "weight": 232,
+    "title": "Title",
+    "description": "description",
+    "price": 3
+  },
+  {
+    "id": 5,
+    "imagePath": "burger.jpeg",
+    "weight": 232,
+    "title": "Title",
+    "description": "description",
+    "price": 3
+  },
+  {
+    "id": 6,
+    "imagePath": "burger.jpeg",
+    "weight": 232,
+    "title": "Title",
+    "description": "description",
+    "price": 3
+  }
+]

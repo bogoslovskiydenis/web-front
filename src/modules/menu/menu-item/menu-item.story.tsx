@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof MenuItem> = (args) => <MenuItem{...args} /
 export const View = Template.bind({})
 View.args = {
 
-	imagePath: '/aseets/burger.jpeg',
+	imagePath: '/assets/burger.jpeg',
 	weight: 555,
 	title: 'Title',
 	description: 'Description',

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
 interface MenuItemProps{
-	imagePath: string,
+	imagePath: any,
 	weight: number,
 	title: string,
 	description: string,
