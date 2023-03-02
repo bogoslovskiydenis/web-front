@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { FooterLink } from '../footer-link/footer.link.story'
 
 export default {
-	title: 'Common/Footer/FooterLink',
+	title: 'Common/FooterLink',
 	component: FooterLink
 } as ComponentMeta<typeof FooterLink>
 
