@@ -20,11 +20,11 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "sb": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "start": "../node_modules/.bin/craco start",
+    "build": "../node_modules/.bin/craco build",
+    "test": "../node_modules/.bin/craco test",
+    "sb": "../node_modules/.bin/start-storybook -p 6006 -s public",
+    "build-storybook": "../node_modules/.bin/build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [

@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { FooterLink } from '../footer-link/footer.link.story'
+import { FooterLink } from './footer.link.story'
 
 export default {
 	title: 'Common/FooterLink',
