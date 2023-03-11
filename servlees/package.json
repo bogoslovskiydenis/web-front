@@ -1,0 +1,26 @@
+{
+  "name": "servlees",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "netlify dev",
+    "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "@netlify/functions": "^1.4.0",
+    "crypto": "^1.0.1",
+    "graphql": "^16.6.0",
+    "graphql-codegen-typescript-operation-types": "^1.2.0",
+    "graphql-request": "^5.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "netlify-cli": "^13.0.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "3.2.2",
+    "@graphql-codegen/typescript": "3.0.2",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.8",
+    "@graphql-codegen/typescript-operations": "^3.0.2",
+    "@graphql-codegen/typescript-resolvers": "3.1.1",
+    "typescript": "^4.9.5"
+  }
+}
