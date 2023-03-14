@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  bigint: any;
   numeric: any;
 };
 
@@ -75,7 +76,7 @@ export type String_Comparison_Exp = {
 /** columns and relationships of "admin" */
 export type Admin = {
   __typename?: 'admin';
-  id: Scalars['Int'];
+  id: Scalars['bigint'];
   password: Scalars['String'];
   username: Scalars['String'];
 };
@@ -121,7 +122,7 @@ export type Admin_Bool_Exp = {
   _and?: InputMaybe<Array<Admin_Bool_Exp>>;
   _not?: InputMaybe<Admin_Bool_Exp>;
   _or?: InputMaybe<Array<Admin_Bool_Exp>>;
-  id?: InputMaybe<Int_Comparison_Exp>;
+  id?: InputMaybe<Bigint_Comparison_Exp>;
   password?: InputMaybe<String_Comparison_Exp>;
   username?: InputMaybe<String_Comparison_Exp>;
 };
@@ -129,17 +130,19 @@ export type Admin_Bool_Exp = {
 /** unique or primary key constraints on table "admin" */
 export enum Admin_Constraint {
   /** unique or primary key constraint on columns "id" */
-  AdminPkey = 'admin_pkey'
+  AdminPkey = 'admin_pkey',
+  /** unique or primary key constraint on columns "username" */
+  AdminUsernameKey = 'admin_username_key'
 }
 
 /** input type for incrementing numeric columns in table "admin" */
 export type Admin_Inc_Input = {
-  id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['bigint']>;
 };
 
 /** input type for inserting data into table "admin" */
 export type Admin_Insert_Input = {
-  id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['bigint']>;
   password?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
 };
@@ -147,7 +150,7 @@ export type Admin_Insert_Input = {
 /** aggregate max on columns */
 export type Admin_Max_Fields = {
   __typename?: 'admin_max_fields';
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['bigint']>;
   password?: Maybe<Scalars['String']>;
   username?: Maybe<Scalars['String']>;
 };
@@ -155,7 +158,7 @@ export type Admin_Max_Fields = {
 /** aggregate min on columns */
 export type Admin_Min_Fields = {
   __typename?: 'admin_min_fields';
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['bigint']>;
   password?: Maybe<Scalars['String']>;
   username?: Maybe<Scalars['String']>;
 };
@@ -185,7 +188,7 @@ export type Admin_Order_By = {
 
 /** primary key columns input for table: admin */
 export type Admin_Pk_Columns_Input = {
-  id: Scalars['Int'];
+  id: Scalars['bigint'];
 };
 
 /** select columns of table "admin" */
@@ -200,7 +203,7 @@ export enum Admin_Select_Column {
 
 /** input type for updating data in table "admin" */
 export type Admin_Set_Input = {
-  id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['bigint']>;
   password?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
 };
@@ -233,7 +236,7 @@ export type Admin_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Admin_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['bigint']>;
   password?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
 };
@@ -241,7 +244,7 @@ export type Admin_Stream_Cursor_Value_Input = {
 /** aggregate sum on columns */
 export type Admin_Sum_Fields = {
   __typename?: 'admin_sum_fields';
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['bigint']>;
 };
 
 /** update columns of table "admin" */
@@ -279,6 +282,19 @@ export type Admin_Var_Samp_Fields = {
 export type Admin_Variance_Fields = {
   __typename?: 'admin_variance_fields';
   id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
+export type Bigint_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['bigint']>;
+  _gt?: InputMaybe<Scalars['bigint']>;
+  _gte?: InputMaybe<Scalars['bigint']>;
+  _in?: InputMaybe<Array<Scalars['bigint']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['bigint']>;
+  _lte?: InputMaybe<Scalars['bigint']>;
+  _neq?: InputMaybe<Scalars['bigint']>;
+  _nin?: InputMaybe<Array<Scalars['bigint']>>;
 };
 
 /** ordering argument of a cursor */
@@ -555,6 +571,8 @@ export type Menu_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** Admin registration */
+  adminRegister?: Maybe<AdminRegisterOutput>;
   /** delete data from the table: "admin" */
   delete_admin?: Maybe<Admin_Mutation_Response>;
   /** delete single row from the table: "admin" */
@@ -571,8 +589,6 @@ export type Mutation_Root = {
   insert_menu?: Maybe<Menu_Mutation_Response>;
   /** insert a single row into the table: "menu" */
   insert_menu_one?: Maybe<Menu>;
-  /** Admin registration */
-  register?: Maybe<AdminRegisterOutput>;
   /** update data of the table: "admin" */
   update_admin?: Maybe<Admin_Mutation_Response>;
   /** update single row of the table: "admin" */
@@ -589,6 +605,12 @@ export type Mutation_Root = {
 
 
 /** mutation root */
+export type Mutation_RootAdminRegisterArgs = {
+  admin: AdminRegisterInput;
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_AdminArgs = {
   where: Admin_Bool_Exp;
 };
@@ -596,7 +618,7 @@ export type Mutation_RootDelete_AdminArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Admin_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['bigint'];
 };
 
 
@@ -637,12 +659,6 @@ export type Mutation_RootInsert_MenuArgs = {
 export type Mutation_RootInsert_Menu_OneArgs = {
   object: Menu_Insert_Input;
   on_conflict?: InputMaybe<Menu_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootRegisterArgs = {
-  admin: AdminRegisterInput;
 };
 
 
@@ -754,7 +770,7 @@ export type Query_RootAdmin_AggregateArgs = {
 
 
 export type Query_RootAdmin_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['bigint'];
 };
 
 
@@ -820,7 +836,7 @@ export type Subscription_RootAdmin_AggregateArgs = {
 
 
 export type Subscription_RootAdmin_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['bigint'];
 };
 
 
@@ -860,21 +876,19 @@ export type Subscription_RootMenu_StreamArgs = {
   where?: InputMaybe<Menu_Bool_Exp>;
 };
 
-export type InsertAdminMutationVariables = Exact<{
-  password?: InputMaybe<Scalars['String']>;
-  username?: InputMaybe<Scalars['String']>;
+export type InsertAdminOneMutationVariables = Exact<{
+  password: Scalars['String'];
+  username: Scalars['String'];
 }>;
 
 
-export type InsertAdminMutation = { __typename?: 'mutation_root', insert_admin?: { __typename?: 'admin_mutation_response', returning: Array<{ __typename?: 'admin', id: number }> } | null };
+export type InsertAdminOneMutation = { __typename?: 'mutation_root', insert_admin_one?: { __typename?: 'admin', id: any } | null };
 
 
-export const InsertAdminDocument = gql`
-    mutation InsertAdmin($password: String = "", $username: String = "") {
-  insert_admin(objects: {password: $password, username: $username}) {
-    returning {
-      id
-    }
+export const InsertAdminOneDocument = gql`
+    mutation InsertAdminOne($password: String!, $username: String!) {
+  insert_admin_one(object: {password: $password, username: $username}) {
+    id
   }
 }
     `;
@@ -886,8 +900,8 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    InsertAdmin(variables?: InsertAdminMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<InsertAdminMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<InsertAdminMutation>(InsertAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'InsertAdmin', 'mutation');
+    InsertAdminOne(variables: InsertAdminOneMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<InsertAdminOneMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<InsertAdminOneMutation>(InsertAdminOneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'InsertAdminOne', 'mutation');
     }
   };
 }

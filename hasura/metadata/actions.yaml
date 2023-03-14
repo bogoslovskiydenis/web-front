@@ -1,8 +1,11 @@
 actions:
-  - name: register
+  - name: adminRegister
     definition:
       kind: synchronous
-      handler: http://host.docker.internal:8888/.netlify/functions/register
+      handler: http://host.docker.internal:8888/.netlify/functions/admin-register
+      headers:
+        - name: x-myweb-secret-key
+          value: mysecretkey
     comment: Admin registration
 custom_types:
   enums: []

@@ -5,12 +5,18 @@ import { getSdk } from '../common/sdk'
 import * as crypto from "crypto"
 
 interface AdminRegisterInput {
-	userName: string,
+	username: string,
 	password: string
 }
 
 const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
-	const { body } = event
+	const { body , headers} = event
+	if(!headers['x-myweb-secret-key']||headers['x-myweb-secret-key'] !==  'mysecretkey'){
+		return {
+			statusCode: 403,
+			body: JSON.stringify({ message: "'x-myweb-secret-key' is missing or valid" })
+		}
+	}
 	const input: AdminRegisterInput = JSON.parse(body!).input.admin
 	console.log("input" , input)
 
@@ -18,8 +24,8 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 	// console.log('data sdk' + data)
 
 	const password = crypto.pbkdf2Sync(input.password , 'mysaltsecret' ,1000, 64,'sha512').toString()
-	const data = await sdk.InsertAdmin({
-		username: input.userName,
+	const data = await sdk.InsertAdminOne({
+		username: input.username,
 		password
 	})
 
@@ -29,7 +35,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 			'https://hasura.io/jwt/claims': {
 				'x-hasura-allowed-roles': ['admin'],
 				'x-hasura-default-role': 'admin',
-				'x-hasura-user-id': data.insert_admin?.returning[0].id
+				'x-hasura-user-id': data.insert_admin_one.id
 			}
 		}, 'myJWTSecret'
 	)
