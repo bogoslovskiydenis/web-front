@@ -1,8 +1,14 @@
 actions:
+  - name: adminLogin
+    definition:
+      kind: ""
+      handler: http://localhost:8888/.netlify/functions/admin-login
+    comment: Login admin
   - name: adminRegister
     definition:
       kind: synchronous
       handler: http://host.docker.internal:8888/.netlify/functions/admin-register
+      forward_client_headers: true
       headers:
         - name: x-myweb-secret-key
           value: mysecretkey
@@ -11,6 +17,8 @@ custom_types:
   enums: []
   input_objects:
     - name: AdminRegisterInput
+    - name: AdminLoginInput
   objects:
     - name: AdminRegisterOutput
+    - name: AdminLoginOutput
   scalars: []

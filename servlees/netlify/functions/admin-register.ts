@@ -2,7 +2,7 @@ import { Handler, HandlerEvent, HandlerContext } from '@netlify/functions'
 import jwt from 'jsonwebtoken'
 import { GraphQLClient } from 'graphql-request'
 import { getSdk } from '../common/sdk'
-import * as crypto from "crypto"
+import * as crypto from 'crypto'
 
 interface AdminRegisterInput {
 	username: string,
@@ -10,24 +10,24 @@ interface AdminRegisterInput {
 }
 
 const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
-	const { body , headers} = event
-	if(!headers['x-myweb-secret-key']||headers['x-myweb-secret-key'] !==  'mysecretkey'){
+	const { body, headers } = event
+	if (!headers['x-myweb-secret-key'] || headers['x-myweb-secret-key'] !== 'mysecretkey') {
 		return {
 			statusCode: 403,
 			body: JSON.stringify({ message: "'x-myweb-secret-key' is missing or valid" })
 		}
 	}
 	const input: AdminRegisterInput = JSON.parse(body!).input.admin
-	console.log("input" , input)
+	console.log('input', input)
 
 	const sdk = getSdk(new GraphQLClient('http://localhost:8080/v1/graphql'))
-	// console.log('data sdk' + data)
 
-	const password = crypto.pbkdf2Sync(input.password , 'mysaltsecret' ,1000, 64,'sha512').toString()
+	const password = crypto.pbkdf2Sync(input.password, 'mysaltsecret', 1000, 64, 'sha512').toString()
 	const data = await sdk.InsertAdminOne({
 		username: input.username,
 		password
 	})
+	console.log('data sdk' + data)
 
 
 	const accessToken = jwt.sign(
@@ -37,7 +37,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 				'x-hasura-default-role': 'admin',
 				'x-hasura-user-id': data.insert_admin_one.id
 			}
-		}, 'myJWTSecret'
+		}, 'wDzQPgtK7EIpxo8rULJr20jozYmBYPOK'
 	)
 
 	return {

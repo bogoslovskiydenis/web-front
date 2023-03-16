@@ -6,6 +6,6 @@
     "hasura-cli": "^2.17.1"
   },
   "scripts": {
-    "start": "hasura console"
+    "start": "hasura console --admin-secret myadminsecretkey"
   }
 }
