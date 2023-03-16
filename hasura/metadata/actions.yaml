@@ -3,7 +3,10 @@ actions:
     definition:
       kind: ""
       handler: http://localhost:8888/.netlify/functions/admin-login
-    comment: Login admin
+      forward_client_headers: true
+    permissions:
+      - role: guest
+    comment: login admin
   - name: adminRegister
     definition:
       kind: synchronous

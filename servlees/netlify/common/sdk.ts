@@ -602,7 +602,7 @@ export type Mutation_Root = {
 
 /** mutation root */
 export type Mutation_RootAdminRegisterArgs = {
-  admin: AdminRegisterInput;
+  adminRegister: AdminRegisterInput;
 };
 
 
@@ -734,7 +734,7 @@ export type Query_Root = {
   __typename?: 'query_root';
   /** fetch data from the table: "admin" */
   admin: Array<Admin>;
-  /** Login admin */
+  /** login admin */
   adminLogin?: Maybe<AdminLoginOutput>;
   /** fetch aggregated fields from the table: "admin" */
   admin_aggregate: Admin_Aggregate;
@@ -759,7 +759,7 @@ export type Query_RootAdminArgs = {
 
 
 export type Query_RootAdminLoginArgs = {
-  admin: AdminLoginInput;
+  adminlogin: AdminLoginInput;
 };
 
 
@@ -879,19 +879,37 @@ export type Subscription_RootMenu_StreamArgs = {
   where?: InputMaybe<Menu_Bool_Exp>;
 };
 
-export type InsertAdminOneMutationVariables = Exact<{
+export type GetAdminByUserNameQueryVariables = Exact<{
+  username?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetAdminByUserNameQuery = { __typename?: 'query_root', admin: Array<{ __typename?: 'admin', id: number, password: string }> };
+
+export type InsertAdminMutationVariables = Exact<{
   password?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type InsertAdminOneMutation = { __typename?: 'mutation_root', insert_admin_one?: { __typename?: 'admin', id: number } | null };
+export type InsertAdminMutation = { __typename?: 'mutation_root', insert_admin?: { __typename?: 'admin_mutation_response', returning: Array<{ __typename?: 'admin', id: number, password: string }> } | null };
 
 
-export const InsertAdminOneDocument = gql`
-    mutation InsertAdminOne($password: String = "", $username: String = "") {
-  insert_admin_one(object: {password: $password, username: $username}) {
+export const GetAdminByUserNameDocument = gql`
+    query GetAdminByUserName($username: String = "") {
+  admin(where: {username: {_eq: $username}}) {
     id
+    password
+  }
+}
+    `;
+export const InsertAdminDocument = gql`
+    mutation InsertAdmin($password: String = "", $username: String = "") {
+  insert_admin(objects: {password: $password, username: $username}) {
+    returning {
+      id
+      password
+    }
   }
 }
     `;
@@ -903,8 +921,11 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    InsertAdminOne(variables?: InsertAdminOneMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<InsertAdminOneMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<InsertAdminOneMutation>(InsertAdminOneDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'InsertAdminOne', 'mutation');
+    GetAdminByUserName(variables?: GetAdminByUserNameQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAdminByUserNameQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAdminByUserNameQuery>(GetAdminByUserNameDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAdminByUserName', 'query');
+    },
+    InsertAdmin(variables?: InsertAdminMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<InsertAdminMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<InsertAdminMutation>(InsertAdminDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'InsertAdmin', 'mutation');
     }
   };
 }

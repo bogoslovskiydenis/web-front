@@ -1,17 +1,13 @@
 import { Handler, HandlerEvent, HandlerContext } from '@netlify/functions'
+import { hashPassword } from '../common/passwords'
+import { api } from '../common/api-sdk'
+import { AdminRegisterInput } from '../common/sdk'
 import jwt from 'jsonwebtoken'
-import { GraphQLClient } from 'graphql-request'
-import { getSdk } from '../common/sdk'
-import * as crypto from 'crypto'
 
-interface AdminRegisterInput {
-	username: string,
-	password: string
-}
 
 const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
 	const { body, headers } = event
-	if (!headers['x-myweb-secret-key'] || headers['x-myweb-secret-key'] !== 'mysecretkey') {
+	if (!headers['x-myweb-secret-key'] || headers['x-hasura-admin-secret'] !== 'myadminsecretkey' ||"mysecretkey") {
 		return {
 			statusCode: 403,
 			body: JSON.stringify({ message: "'x-myweb-secret-key' is missing or valid" })
@@ -20,13 +16,14 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 	const input: AdminRegisterInput = JSON.parse(body!).input.admin
 	console.log('input', input)
 
-	const sdk = getSdk(new GraphQLClient('http://localhost:8080/v1/graphql'))
 
-	const password = crypto.pbkdf2Sync(input.password, 'mysaltsecret', 1000, 64, 'sha512').toString()
-	const data = await sdk.InsertAdminOne({
+	const password = hashPassword(input.password)
+	const data = await api.InsertAdmin({
 		username: input.username,
 		password
-	})
+	},
+		// { 'x-hasura-admin-secret': "myadminsecretkey", }
+	)
 	console.log('data sdk' + data)
 
 
@@ -35,7 +32,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 			'https://hasura.io/jwt/claims': {
 				'x-hasura-allowed-roles': ['admin'],
 				'x-hasura-default-role': 'admin',
-				'x-hasura-user-id': data.insert_admin_one.id
+				'x-hasura-user-id': data.insert_admin
 			}
 		}, 'wDzQPgtK7EIpxo8rULJr20jozYmBYPOK'
 	)

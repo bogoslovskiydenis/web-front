@@ -1,5 +1,16 @@
-mutation InsertAdminOne($password: String="", $username: String="") {
-    insert_admin_one(object: {password: $password, username: $username}) {
+query GetAdminByUserName($username: String = "") {
+    admin(where: {username: {_eq: $username}}) {
         id
+        password
+    }
+}
+
+
+mutation InsertAdmin($password: String = "", $username: String = "") {
+    insert_admin(objects: {password: $password, username: $username}) {
+        returning {
+            id
+            password
+        }
     }
 }

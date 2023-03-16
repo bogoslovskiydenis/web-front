@@ -30,7 +30,7 @@ services:
       # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
-      HASURA_UNAUTHORIZED_ROLE: guest
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: guest
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "HS256", "key":"wDzQPgtK7EIpxo8rULJr20jozYmBYPOK"}'
 volumes:
   db_data:

@@ -1,0 +1,5 @@
+mutation AminRegister($password: String = "admin3", $username: String = "admin3") {
+  adminRegister(admin: {username: $username, password: $password}) {
+    accessToken
+  }
+}

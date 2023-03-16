@@ -1,12 +1,12 @@
 type Query {
   adminLogin(
-    admin: AdminLoginInput!
+    adminlogin: AdminLoginInput!
   ): AdminLoginOutput
 }
 
 type Mutation {
   adminRegister(
-    admin: AdminRegisterInput!
+    adminRegister: AdminRegisterInput!
   ): AdminRegisterOutput
 }
 
