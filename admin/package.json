@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
+    "@graphql-codegen/cli": "^3.2.2",
+    "@graphql-codegen/typescript": "^3.0.2",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.8",
+    "@graphql-codegen/typescript-operations": "^3.0.2",
     "@mui/material": "^5.11.11",
     "@mui/styled-engine-sc": "^5.11.11",
     "@testing-library/jest-dom": "^5.14.1",
@@ -29,7 +33,8 @@
     "start": "PORT=3006 react-scripts start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": [
