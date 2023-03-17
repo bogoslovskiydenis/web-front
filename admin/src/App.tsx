@@ -5,6 +5,7 @@ import buildHasuraProvider from 'ra-data-hasura'
 import { MenuList } from './modules/components/menu/menu-list.components'
 import { MenuEdit } from './modules/components/menu/menu-edit.component'
 import { MenuCreate } from './modules/components/menu/menu-create.component'
+import { authProvider } from './provider/authProvider'
 
 export function App() {
 	const [dataProvider, setDataProvider] = useState<DataProvider<string> | null>(null)
@@ -28,7 +29,7 @@ export function App() {
 	return (
 		<>
 			<CssBaseline />
-			<Admin dataProvider={dataProvider}>
+			<Admin dataProvider={dataProvider} authProvider={authProvider} requireAuth >
 
 				<Resource name="menu" list={MenuList} edit={MenuEdit} create={MenuCreate}/>
 			</Admin>

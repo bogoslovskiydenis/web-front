@@ -1,7 +1,7 @@
-import { Header } from '@app/common/components/header/header.component'
-import { MenuGrid } from '@app/modules/menu/menu-grid/menu-grid.component'
 import testJson from './test-json.json'
-import Footer from '@app/common/components/footer/footer.component'
+import { Header } from './common/components/header/header.component'
+import { MenuGrid } from './modules/menu/menu-grid/menu-grid.component'
+import { Footer } from './common/components/footer/footer.component'
 
 
 export const App = () => {

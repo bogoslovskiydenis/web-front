@@ -9,7 +9,7 @@ interface MenuItemProps{
 }
 
 
-const MenuItem:FC<MenuItemProps> = ({imagePath, weight,title,description,price}) => {
+export const MenuItem:FC<MenuItemProps> = ({imagePath, weight,title,description,price}) => {
 	return (
 		<div className='w-96 shadow-xl rounded-2xl bg-white'>
 			<div className='relative '>
@@ -25,5 +25,3 @@ const MenuItem:FC<MenuItemProps> = ({imagePath, weight,title,description,price})
 		</div>
 	)
 }
-
-export default MenuItem

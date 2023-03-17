@@ -1,8 +1,6 @@
-import MenuItem from '../menu-item/menu-item.component'
-
 import { FC } from 'react'
 import { ItemMenu } from '../../types/item-menu'
-
+import { MenuItem } from '../menu-item/menu-item.component'
 
 interface MenuListProps {
 	items: ItemMenu[]
