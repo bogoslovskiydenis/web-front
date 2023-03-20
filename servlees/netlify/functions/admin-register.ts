@@ -7,13 +7,13 @@ import jwt from 'jsonwebtoken'
 
 const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
 	const { body, headers } = event
-	if (!headers['x-myweb-secret-key'] || headers['x-hasura-admin-secret'] !== 'myadminsecretkey' ||"mysecretkey") {
+	if (!headers['x-myweb-secret-key'] || headers['x-myweb-secret-key'] !== 'mysecretkey') {
 		return {
 			statusCode: 403,
 			body: JSON.stringify({ message: "'x-myweb-secret-key' is missing or valid" })
 		}
 	}
-	const input: AdminRegisterInput = JSON.parse(body!).input.admin
+	const input: AdminRegisterInput = JSON.parse(body!).input.adminRegister
 	console.log('input', input)
 
 
@@ -22,7 +22,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 		username: input.username,
 		password
 	},
-		// { 'x-hasura-admin-secret': "myadminsecretkey", }
+		 { 'x-hasura-admin-secret': "myadminsecretkey", }
 	)
 	console.log('data sdk' + data)
 
